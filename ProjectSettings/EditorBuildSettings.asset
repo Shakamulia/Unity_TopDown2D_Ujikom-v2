@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/SpalshScreen.unity
+    guid: f263a530bda477e4b84e557eb95a6040
+  - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: 01abe7cb800c7074a897a8f7f0dede83
   - enabled: 1
