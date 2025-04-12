@@ -27,5 +27,11 @@ public class MainMenuController : MonoBehaviour
     public void Level1Button()
     {
         SceneManager.LoadScene("Scene1");
+    }    public void Level2Button()
+    {
+        SceneManager.LoadScene("Scene2");
+    }    public void Level3Button()
+    {
+        SceneManager.LoadScene("Scene3");
     }
 }
