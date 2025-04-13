@@ -11,6 +11,7 @@ public class PlayerHealth : Singleton<PlayerHealth>
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private float knockBackThrustAmount = 10f;
     [SerializeField] private float damageRecoveryTime = 1f;
+    [SerializeField] private GameObject gameOverPanel;
 
     private Slider healthSlider;
     private int currentHealth;
@@ -86,8 +87,8 @@ public class PlayerHealth : Singleton<PlayerHealth>
     private IEnumerator DeathLoadSceneRoutine()
     {
         yield return new WaitForSeconds(2f);
-        Destroy(gameObject);
-        SceneManager.LoadScene(TOWN_TEXT);
+        Time.timeScale = 0f;
+        gameOverPanel.SetActive(true);
     }
 
     private IEnumerator DamageRecoveryRoutine()
@@ -105,5 +106,27 @@ public class PlayerHealth : Singleton<PlayerHealth>
 
         healthSlider.maxValue = maxHealth;
         healthSlider.value = currentHealth;
+    }
+
+    public void RetryLevel()
+    {
+        Time.timeScale = 1f;
+        PlayerHealth.Instance.ResetPlayer(); // Fix: Added parentheses to call the method
+        currentHealth = maxHealth;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        gameOverPanel.SetActive(false);
+    }
+
+    public void ResetPlayer()
+    {
+        isDead = false;
+        currentHealth = maxHealth;
+        UpdateHealthSlider();
+    }
+
+    public void BackToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Main Menu");
     }
 }

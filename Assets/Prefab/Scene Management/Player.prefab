@@ -293,6 +293,7 @@ GameObject:
   - component: {fileID: 8361676880565948495}
   - component: {fileID: 377165186009068236}
   - component: {fileID: 2610938366118948604}
+  - component: {fileID: 5758949575730977996}
   - component: {fileID: 628796415839784011}
   - component: {fileID: 4701527769459469005}
   - component: {fileID: 9205924130034762143}
@@ -300,7 +301,7 @@ GameObject:
   - component: {fileID: 5883860904566978627}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -388,7 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  dashSpeed: 4
+  dashSpeed: 5
   myTrailRenderer: {fileID: 923958795473165947}
   weaponCollider: {fileID: 7959532746085802369}
 --- !u!114 &377165186009068236
@@ -406,6 +407,7 @@ MonoBehaviour:
   maxHealth: 3
   knockBackThrustAmount: 10
   damageRecoveryTime: 1
+  gameOverPanel: {fileID: 0}
 --- !u!114 &2610938366118948604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,6 +422,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whiteFlashMat: {fileID: 2100000, guid: 4144526fdbccbad43ab036d27f026a2c, type: 2}
   restoreDefaultMatTime: 0.2
+--- !u!114 &5758949575730977996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7622376762156174875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90fccfee91cf5594280a44afe449d8b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullStaminaImage: {fileID: 21300000, guid: b984e9b1f2b37544e99a03e0e9e13486, type: 3}
+  emptyStaminaImage: {fileID: 21300000, guid: e1d3b1819b401654fb945fc59c607356, type: 3}
+  timeBetweenStaminaRefresh: 3
 --- !u!114 &628796415839784011
 MonoBehaviour:
   m_ObjectHideFlags: 0
