@@ -16,7 +16,23 @@ public class Shooter : MonoBehaviour, IEnemy
     [Tooltip("Stagger must be enabled for oscillate to function properly.")]
     [SerializeField] private bool oscillate;
 
+    private bool isOscillateLoopStarted;
+
+    private Coroutine oscillateLoopRoutine;
+    
     private bool isShooting = false;
+    [SerializeField]private float oscillateOnDuration = 5f;
+    [SerializeField]private float oscillateOffDuration = 5f;
+
+    private void Start()
+    {
+        // Mulai loop oscillate di awal
+        if (!isOscillateLoopStarted)
+        {
+            oscillateLoopRoutine = StartCoroutine(OscillateLoopRoutine());
+            isOscillateLoopStarted = true;
+        }
+    }
 
     private void OnValidate()
     {
@@ -37,6 +53,24 @@ public class Shooter : MonoBehaviour, IEnemy
         {
             StartCoroutine(ShootRoutine());
         }
+    }
+
+    private IEnumerator OscillateLoopRoutine()
+    {
+        while (true)
+        {
+            SetOscillate(true);
+            yield return new WaitForSeconds(Random.Range(oscillateOnDuration, oscillateOnDuration + 2f));
+
+            SetOscillate(false);
+            yield return new WaitForSeconds(Random.Range(oscillateOffDuration, oscillateOffDuration + 2f));
+        }
+    }
+
+    private void SetOscillate(bool value)
+    {
+        oscillate = value;
+        stagger = value;
     }
 
     private IEnumerator ShootRoutine()
