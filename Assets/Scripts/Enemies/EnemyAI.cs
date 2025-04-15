@@ -12,17 +12,13 @@ public class EnemyAI : MonoBehaviour
 
     private bool canAttack = true;
 
-    private enum State
-    {
-        Roaming,
-        Attacking
-    }
+    private enum State { Roaming, Attacking }
 
     private Vector2 roamPosition;
     private float timeRoaming = 0f;
-
     private State state;
     private EnemyPathfinding enemyPathfinding;
+    private Transform playerTarget;
 
     private void Awake()
     {
@@ -32,11 +28,23 @@ public class EnemyAI : MonoBehaviour
 
     private void Start()
     {
-        roamPosition = GetRoamingPosition();
+        roamPosition = GetRoamingPosition();    
+        if (PlayerController.Instance != null)
+    {
+        playerTarget = PlayerController.Instance.transform;
+    }
+        //FindPlayer();
     }
 
     private void Update()
     {
+        // Coba cari player jika belum ada
+        //if (playerTarget == null)
+        //{
+        //    FindPlayer();
+        //    return;
+        //}
+
         MovementStateControl();
     }
 
@@ -61,7 +69,7 @@ public class EnemyAI : MonoBehaviour
 
         enemyPathfinding.MoveTo(roamPosition);
 
-        if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) < attackRange)
+        if (playerTarget != null && Vector2.Distance(transform.position, playerTarget.position) < attackRange)
         {
             state = State.Attacking;
         }
@@ -74,25 +82,26 @@ public class EnemyAI : MonoBehaviour
 
     private void Attacking()
     {
-        if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) > attackRange)
+        if (playerTarget == null)
+        {
+            state = State.Roaming;
+            return;
+        }
+
+        if (Vector2.Distance(transform.position, playerTarget.position) > attackRange)
         {
             state = State.Roaming;
         }
 
         if (attackRange != 0 && canAttack)
         {
-
             canAttack = false;
             (enemyType as IEnemy).Attack();
 
             if (stopMovingWhileAttacking)
-            {
                 enemyPathfinding.StopMoving();
-            }
             else
-            {
                 enemyPathfinding.MoveTo(roamPosition);
-            }
 
             StartCoroutine(AttackCooldownRoutine());
         }
@@ -109,4 +118,30 @@ public class EnemyAI : MonoBehaviour
         timeRoaming = 0f;
         return new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
     }
+
+    private void FindPlayer()
+    {
+        if (PlayerController.Instance != null)
+        {
+            playerTarget = PlayerController.Instance.transform;
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnPlayerSpawned.AddListener(SetPlayerTarget);
+    }
+
+    private void OnDisable()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnPlayerSpawned.RemoveListener(SetPlayerTarget);
+    }
+
+    private void SetPlayerTarget(Transform target)
+    {
+        playerTarget = target;
+    }
+
 }

@@ -108,13 +108,9 @@ public class PlayerHealth : Singleton<PlayerHealth>
         healthSlider.value = currentHealth;
     }
 
-    public void RetryLevel()
+    public void OnRetryLevel()
     {
-        Time.timeScale = 1f;
-        PlayerHealth.Instance.ResetPlayer(); // Fix: Added parentheses to call the method
-        currentHealth = maxHealth;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        gameOverPanel.SetActive(false);
+        GameManager.Instance.RetryLevel();
     }
 
     public void ResetPlayer()
@@ -126,7 +122,6 @@ public class PlayerHealth : Singleton<PlayerHealth>
 
     public void BackToMainMenu()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("Main Menu");
+        GameManager.Instance.ReturnToMainMenu();
     }
 }
