@@ -20,17 +20,22 @@ public class TriggerZone : MonoBehaviour
         if (AlreadyEntered)
         {
             return;
+            Debug.Log("Berhasil");
         }
 
         if (!string.IsNullOrEmpty(collisionTag) && !collision.CompareTag(collisionTag))
         {
             return;
+            Debug.Log("Error");
         }
 
         OnTriggerEnter?.Invoke();
 
+        Debug.Log("Triggered!");
+
         if(OneShot)
             AlreadyEntered = true;
+            
     }
 
     private void OnTriggerExit2D(Collider2D collision)

@@ -54,6 +54,7 @@ public class LevelMenuManager : MonoBehaviour
         int nextLevel = currentLevelIndex + 1; // Unlock the next level
         PlayerPrefs.SetInt("Level" + nextLevel + "_Unlocked", 1); // Set the next level as unlocked
         PlayerPrefs.Save(); // Save the PlayerPrefs
+        levelButtons[i].interactable = true;
     }
 
     public void ResetProgress()

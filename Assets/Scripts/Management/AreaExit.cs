@@ -14,6 +14,14 @@ public class AreaExit : MonoBehaviour
     {
         if (other.gameObject.GetComponent<PlayerController>())
         {
+            // Dapatkan index level saat ini dari nama scene
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            int currentLevelIndex = int.Parse(currentSceneName.Replace("Scene", ""));
+            
+            // Buka level berikutnya di PlayerPrefs
+            LevelMenuManager.UnlockNextLevel(currentLevelIndex);
+
+            //lanjutkan proses ke scene selanjutnya
             SceneManagement.Instance.SetTransitionName(sceneTransitionName);
             UIFade.Instance.FadeToBlack();
             StartCoroutine(LoadSceneRoutine());
