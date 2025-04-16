@@ -26,7 +26,7 @@ public class MainMenuController : MonoBehaviour
 
     public void Level1Button()
     {
-        SceneManager.LoadScene("Scene1");
+        SceneManager.LoadScene("Cutscene");
     }    public void Level2Button()
     {
         SceneManager.LoadScene("Scene2");

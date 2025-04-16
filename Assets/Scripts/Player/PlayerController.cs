@@ -6,8 +6,6 @@ public class PlayerController : Singleton<PlayerController>
 {
     public bool FacingLeft { get { return facingLeft; } }
 
-    public static PlayerController Instance { get; private set; }
-
 
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float dashSpeed = 4f;
