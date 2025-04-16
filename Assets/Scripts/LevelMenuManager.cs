@@ -5,6 +5,12 @@ using UnityEngine.UI;
 public class LevelMenuManager : MonoBehaviour
 {
     [SerializeField] private Button[] levelButtons;
+    public static LevelMenuManager instance;
+
+    void Awake()
+    {
+        instance = this; // inisialisasi singleton
+    }
 
     private void Start()
     {
@@ -39,6 +45,9 @@ public class LevelMenuManager : MonoBehaviour
             }
             else
             {
+                levelButtons[i].interactable = true;
+                levelButtons[i].GetComponent<Image>().color = Color.white; // Change button color to original
+                levelButtons[i].onClick.RemoveAllListeners();
                 levelButtons[i].onClick.AddListener(() => LoadLevel(levelIndex)); // Add listener to load the level
             }
         }
@@ -54,7 +63,8 @@ public class LevelMenuManager : MonoBehaviour
         int nextLevel = currentLevelIndex + 1; // Unlock the next level
         PlayerPrefs.SetInt("Level" + nextLevel + "_Unlocked", 1); // Set the next level as unlocked
         PlayerPrefs.Save(); // Save the PlayerPrefs
-        levelButtons[i].interactable = true;
+
+        if(instance != null) instance.UpdateLevelButtons();
     }
 
     public void ResetProgress()
