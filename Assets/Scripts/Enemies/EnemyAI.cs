@@ -127,18 +127,6 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        if (GameManager.Instance != null)
-            GameManager.Instance.OnPlayerSpawned.AddListener(SetPlayerTarget);
-    }
-
-    private void OnDisable()
-    {
-        if (GameManager.Instance != null)
-            GameManager.Instance.OnPlayerSpawned.RemoveListener(SetPlayerTarget);
-    }
-
     private void SetPlayerTarget(Transform target)
     {
         playerTarget = target;

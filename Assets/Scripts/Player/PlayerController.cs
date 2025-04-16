@@ -27,11 +27,6 @@ public class PlayerController : Singleton<PlayerController>
     {
         base.Awake();
 
-        if (GameManager.Instance != null)
-                {
-                    GameManager.Instance.PlayerSpawned(transform);
-                }   
-
         playerControls = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
