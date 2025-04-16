@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5349247423348203222}
   - component: {fileID: 4481686426392898424}
   - component: {fileID: 7458954301440283682}
+  - component: {fileID: 8181471267066726765}
   m_Layer: 0
   m_Name: NPC 1
   m_TagString: Untagged
@@ -137,6 +138,21 @@ MonoBehaviour:
   myConversation: {fileID: 1645722363466594521}
   InteractionHint: {fileID: 0}
   playerController: {fileID: 0}
+--- !u!111 &8181471267066726765
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5460171850540667563}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: -5252816984213320552, guid: 60f8999fa1405884f8ae6b8ba0787def, type: 3}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &5950688684773931925
 GameObject:
   m_ObjectHideFlags: 0
