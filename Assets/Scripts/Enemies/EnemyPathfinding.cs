@@ -4,7 +4,19 @@ using UnityEngine;
 
 public class EnemyPathfinding : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float _moveSpeed = 2f;
+
+     // Property publik untuk baca/tulis
+    public float moveSpeed
+    {
+        get => _moveSpeed;
+        set
+        {
+            // ⭐️ kamu bisa validasi di sini kalau perlu, misal:
+            _moveSpeed = Mathf.Max(0, value);
+        }
+    }
+
 
     private Rigidbody2D rb;
     private Vector2 moveDir;

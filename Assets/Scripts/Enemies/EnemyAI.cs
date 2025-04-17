@@ -5,20 +5,20 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private float roamChangeDirFloat = 2f;
-    [SerializeField] private float attackRange = 0f;
+    [SerializeField] protected float attackRange = 0f;
     [SerializeField] private MonoBehaviour enemyType;
     [SerializeField] private float attackCooldown = 2f;
     [SerializeField] private bool stopMovingWhileAttacking = false;
 
-    private bool canAttack = true;
+    protected bool canAttack = true;
 
-    private enum State { Roaming, Attacking }
+    protected enum State { Roaming, Attacking }
 
     private Vector2 roamPosition;
     private float timeRoaming = 0f;
-    private State state;
-    private EnemyPathfinding enemyPathfinding;
-    private Transform playerTarget;
+    protected State state;
+    protected EnemyPathfinding enemyPathfinding;
+    protected Transform playerTarget;
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class EnemyAI : MonoBehaviour
         state = State.Roaming;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         roamPosition = GetRoamingPosition();    
         if (PlayerController.Instance != null)
@@ -80,7 +80,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private void Attacking()
+    protected virtual void Attacking()
     {
         if (playerTarget == null)
         {
@@ -91,12 +91,20 @@ public class EnemyAI : MonoBehaviour
         if (Vector2.Distance(transform.position, playerTarget.position) > attackRange)
         {
             state = State.Roaming;
+            return; // added return to exit early
         }
 
         if (attackRange != 0 && canAttack)
         {
             canAttack = false;
-            (enemyType as IEnemy).Attack();
+            if(enemyType != null && enemyType is IEnemy enemy)
+            {
+                enemy.Attack();
+            }
+            else
+            {
+                Debug.Log("enemyType not set or doesn't implement IEnemy!", this);
+            }
 
             if (stopMovingWhileAttacking)
                 enemyPathfinding.StopMoving();
