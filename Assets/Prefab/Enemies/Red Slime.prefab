@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3548019784336227625}
   - component: {fileID: 7641007203013381234}
   - component: {fileID: -3265742245183830711}
+  - component: {fileID: 8935327108537676481}
   - component: {fileID: 7241003644113636768}
   - component: {fileID: 4083361277808172437}
   - component: {fileID: 8170726905043439404}
@@ -21,7 +22,7 @@ GameObject:
   - component: {fileID: 2421421357548391998}
   m_Layer: 0
   m_Name: Red Slime
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,9 +107,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roamChangeDirFloat: 2
-  attackRange: 0
+  attackRange: 10
   enemyType: {fileID: 0}
-  attackCooldown: 2
+  attackCooldown: 3
   stopMovingWhileAttacking: 0
 --- !u!114 &-3265742245183830711
 MonoBehaviour:
@@ -123,14 +124,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roamChangeDirFloat: 2
-  attackRange: 0
+  attackRange: 10
   enemyType: {fileID: 0}
-  attackCooldown: 2
+  attackCooldown: 3
   stopMovingWhileAttacking: 0
-  dashSpeedMultiplier: 3
-  dashDuration: 0.2
-  dashCooldown: 2
+  dashSpeedMultiplier: 5
+  dashDuration: 0.8
+  dashCooldown: 1
   dashTrail: {fileID: 7906887813153533288, guid: 94982daec3bc1764ebd3a3fd57b95147, type: 3}
+--- !u!114 &8935327108537676481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4734540491556987132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ba6d86df8643c438e1e1400e391055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyDash: {fileID: -3265742245183830711}
 --- !u!114 &7241003644113636768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,9 +259,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.038737148, y: -0.025933534}
-  m_Size: {x: 0.82497853, y: 0.82497853}
-  m_Direction: 0
+  m_Offset: {x: 0.010330208, y: -0.70071876}
+  m_Size: {x: 0.9386294, y: 0.69712704}
+  m_Direction: 1
 --- !u!114 &2421421357548391998
 MonoBehaviour:
   m_ObjectHideFlags: 0
